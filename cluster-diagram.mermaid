@@ -1,0 +1,74 @@
+graph TD
+    subgraph "GKE Anthos Bare Metal Cluster"
+        CP[Control Plane Node<br>172.21.237.32]
+        WN[Worker Node<br>172.21.237.33]
+        CP --- WN
+        
+        subgraph "Network Configuration"
+            POD_NET[Pod Network<br>192.168.0.0/16]
+            LIVEWIRE[LiveWire Network<br>VLAN 410]
+            HEARTBEAT[Heartbeat Network<br>VLAN 300]
+        end
+        
+        subgraph "Storage"
+            NFS[NFS Server<br>172.21.237.31]
+            LVP_DISK[Local Disk Storage<br>/mnt/localpv-disk]
+            LVP_SHARE[Local Shared Storage<br>/mnt/localpv-share]
+        end
+        
+        subgraph "Telos Applications"
+            ALTUS[Altus Pod<br>192.168.41.25]
+            ZEPHYR[Zephyr Pod<br>192.168.41.26]
+            PDM[PDM Pod<br>192.168.41.27]
+            FORZA[Forza Pod<br>192.168.41.28]
+        end
+        
+        subgraph "Windows VMs"
+            WIN_VM1[Windows VM 1<br>RS-1<br>192.168.41.8]
+            WIN_VM2[Windows VM 2<br>Content Server<br>192.168.41.9]
+            WIN_VM3[Windows VM 3<br>RS-2<br>192.168.41.10]
+            WIN_VM4[Windows VM 4<br>192.168.41.11]
+            WIN_VM5[Windows VM 5<br>X2<br>192.168.41.12]
+        end
+        
+        subgraph "Linux VMs"
+            PATHFINDER[Pathfinder VM<br>172.16.0.7]
+            PHONES[Phones VX VM<br>172.16.0.8]
+        end
+    end
+    
+    WN --- ALTUS
+    WN --- ZEPHYR
+    WN --- PDM
+    WN --- FORZA
+    
+    WN --- WIN_VM1
+    WN --- WIN_VM2
+    WN --- WIN_VM3
+    WN --- WIN_VM4
+    WN --- WIN_VM5
+    
+    WN --- PATHFINDER
+    WN --- PHONES
+    
+    NFS --- WN
+    LVP_DISK --- WN
+    LVP_SHARE --- WN
+    
+    POD_NET --- WN
+    LIVEWIRE --- WN
+    HEARTBEAT --- WN
+    
+    EXTERNAL_LB[Load Balancer<br>172.21.237.48/28]
+    EXTERNAL_LB --- CP
+    
+    CONTROL_VIP[Control Plane VIP<br>172.21.237.37]
+    CONTROL_VIP --- CP
+    
+    USER1[User: aaron.wolfrom@audacy.com]
+    USER2[User: mike.wiseley@cdw.com]
+    USER3[User: spencer.cuffe@cdw.com]
+    
+    USER1 --- CONTROL_VIP
+    USER2 --- CONTROL_VIP
+    USER3 --- CONTROL_VIP
