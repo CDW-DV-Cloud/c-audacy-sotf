@@ -1,0 +1,120 @@
+apiVersion: vm.cluster.gke.io/v1
+kind: VirtualMachine
+metadata:
+  name: windows-vm-1 #rs-1
+  annotations:
+    networking.gke.io/enable-multicast: "true"
+spec:
+  osType: Windows
+  disks:
+    - virtualMachineDiskName: vm-1
+      boot: true
+  compute:
+    cpu:
+      vcpus: 8
+    memory:
+      capacity: 32Gi
+  interfaces:
+    - name: eth0
+      networkName: pod-network
+      default: true
+    - name: net1
+      networkName: livewire
+      ipAddresses: [192.168.41.8/24]
+---
+apiVersion: vm.cluster.gke.io/v1
+kind: VirtualMachine
+metadata:
+  name: windows-vm-2 #cs
+  annotations:
+    networking.gke.io/enable-multicast: "true"
+spec:
+  osType: Windows
+  disks:
+    - virtualMachineDiskName: vm-2
+      boot: true
+    - virtualMachineDiskName: vm-cs-2
+  compute:
+    cpu:
+      vcpus: 8
+    memory:
+      capacity: 32Gi
+  interfaces:
+    - name: eth0
+      networkName: pod-network
+      default: true
+    - name: net1
+      networkName: livewire
+      ipAddresses: [192.168.41.9/24]
+---
+apiVersion: vm.cluster.gke.io/v1
+kind: VirtualMachine
+metadata:
+  name: windows-vm-3 #rs-2
+  annotations:
+    networking.gke.io/enable-multicast: "true"
+spec:
+  osType: Windows
+  disks:
+    - virtualMachineDiskName: vm-3
+      boot: true
+  compute:
+    cpu:
+      vcpus: 8
+    memory:
+      capacity: 32Gi
+  interfaces:
+    - name: eth0
+      networkName: pod-network
+      default: true
+    - name: net1
+      networkName: livewire
+      ipAddresses: [192.168.41.10/24]
+---
+apiVersion: vm.cluster.gke.io/v1
+kind: VirtualMachine
+metadata:
+  name: windows-vm-4
+  annotations:
+    networking.gke.io/enable-multicast: "true"
+spec:
+  osType: Windows
+  disks:
+    - virtualMachineDiskName: vm-4
+      boot: true
+  compute:
+    cpu:
+      vcpus: 8
+    memory:
+      capacity: 32Gi
+  interfaces:
+    - name: eth0
+      networkName: pod-network
+      default: true
+    - name: net1
+      networkName: livewire
+      ipAddresses: [192.168.41.11/24]
+---
+apiVersion: vm.cluster.gke.io/v1
+kind: VirtualMachine
+metadata:
+  name: windows-vm-5 #x-2
+  annotations:
+    networking.gke.io/enable-multicast: "true"
+spec:
+  osType: Windows
+  disks:
+    - virtualMachineDiskName: vm-5
+      boot: true
+  compute:
+    cpu:
+      vcpus: 8
+    memory:
+      capacity: 32Gi
+  interfaces:
+    - name: eth0
+      networkName: pod-network
+      default: true
+    - name: net1
+      networkName: livewire
+      ipAddresses: [192.168.41.12/24]

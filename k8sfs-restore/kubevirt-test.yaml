@@ -1,0 +1,49 @@
+apiVersion: kubevirt.io/v1
+kind: VirtualMachine
+metadata:
+  name: test-vm-3
+spec:
+  running: true
+  template:
+    metadata:
+      labels:
+        kubevirt.io/vm: test-vm-4
+      annotations:
+        networking.gke.io/networks: '[{
+          "name": "livewire",
+          "namespace": "",
+          "ips": ["172.16.0.5/24"]}]'
+        k8s.v1.cni.cncf.io/networks: livewire-nad
+    spec:
+      domain:
+        cpu:
+          cores: 8
+          sockets: 1
+          threads: 1
+        memory:
+          guest: 32Gi
+        devices:
+          disks:
+          - name: bootdisk
+            disk:
+              bus: virtio
+          interfaces:
+          - name: default
+            masquerade: {}
+          - name: net1
+            bridge: {}
+          - name: net2
+            bridge: {}
+      networks:
+      - name: default
+        pod: {}
+      - name: net1
+        multus:
+          networkName: livewire
+      - name: net2
+        multus:
+          networkName: livewire-nad
+      volumes:
+      - name: bootdisk
+        persistentVolumeClaim:
+          claimName: vm-4

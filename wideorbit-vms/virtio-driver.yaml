@@ -1,0 +1,11 @@
+apiVersion: vm.cluster.gke.io/v1
+kind: VirtualMachineDisk
+metadata:
+  name: virtio-driver
+spec:
+  size: 1Gi
+  source:
+    registry:
+      url: docker://quay.io/kubevirt/virtio-container-disk:latest
+  diskType: cdrom
+  storageClassName: k8sfs

@@ -1,0 +1,21 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: x2-service
+spec:
+  selector:
+    kubevirt/vm: windows-vm-5
+  ports:
+    - port: 80
+      targetPort: 80
+      name: http
+      protocol: TCP
+    - port: 443
+      targetPort: 443
+      name: https
+      protocol: TCP
+    - port: 31000
+      targetPort: 31000
+      name: encoder
+  type: LoadBalancer
+  allocateLoadBalancerNodePorts: false

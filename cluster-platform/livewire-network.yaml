@@ -1,0 +1,20 @@
+## NOTE: The incoming port to the ethenet needs to have tagged traffic
+#        for the VLAN ID 410 (in this example). Untagged is native VLAN
+#        for the kubernetes cluster
+---
+apiVersion: networking.gke.io/v1
+kind: Network
+metadata:
+  name: livewire-network
+spec:
+  type: L2
+  networkLifecycle: AnthosManaged
+  l2NetworkConfig:
+    vlanID: 410
+  nodeInterfaceMatcher:
+    interfaceName: eno2    # Verify that all 3 nodes are on the same interface name
+  gateway4: 192.168.41.1
+  dnsConfig:
+    nameservers:
+    - 8.8.8.8
+    - 8.8.4.4

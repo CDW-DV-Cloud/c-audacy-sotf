@@ -1,0 +1,24 @@
+apiVersion: networking.gke.io/v1
+kind: Network
+metadata:
+  annotations:
+    kubectl.kubernetes.io/last-applied-configuration: |
+      {"apiVersion":"networking.gke.io/v1","kind":"Network","metadata":{"annotations":{},"name":"pod-network"},"spec":{"IPAMMode":"Internal","dnsConfig":{"nameservers":["10.96.0.10"]},"routes":[{"to":"192.168.0.0/16"},{"to":"10.96.0.0/20"}],"type":"L3"}}
+    networking.gke.io/in-use: "true"
+  creationTimestamp: "2024-11-12T17:51:21Z"
+  finalizers:
+  - networking.gke.io/network-finalizer
+  generation: 2
+  name: pod-network
+  resourceVersion: "16389"
+  uid: 93fa8b4e-2b60-47fc-ab0c-ce7f6c7ff8ee
+spec:
+  IPAMMode: Internal
+  dnsConfig:
+    nameservers:
+    - 10.96.0.10
+  nodeInterfaceMatcher: {}
+  routes:
+  - to: 192.168.0.0/16
+  - to: 10.96.0.0/20
+  type: L3

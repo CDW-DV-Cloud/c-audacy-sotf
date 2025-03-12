@@ -1,0 +1,32 @@
+
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: pdm-deployment
+  labels:
+    app: pdm
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: pdm
+  template:
+    metadata:
+      labels:
+        app: pdm
+    spec:
+      containers:
+      - name: pdm
+        image: quay.io/telosalliance/pdmx
+        resources:
+          requests:
+            cpu: 400m
+            memory: 8Gi
+          limits:
+            cpu: 400m
+            memory: 8Gi
+        ports:
+        - containerPort: 80
+      imagePullSecrets:
+        - name: quay-pull-secret

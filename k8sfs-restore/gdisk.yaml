@@ -1,0 +1,41 @@
+apiVersion: vm.cluster.gke.io/v1
+kind: VirtualMachineDisk
+metadata:
+  name: vm-1
+spec:
+  persistentVolumeClaimName: vm-1
+---
+apiVersion: vm.cluster.gke.io/v1
+kind: VirtualMachineDisk
+metadata:
+  name: vm-2
+spec:
+  persistentVolumeClaimName: vm-2
+---
+apiVersion: vm.cluster.gke.io/v1
+kind: VirtualMachineDisk
+metadata:
+  name: vm-cs-2
+spec:
+  persistentVolumeClaimName: vm-cs-2
+---
+apiVersion: vm.cluster.gke.io/v1
+kind: VirtualMachineDisk
+metadata:
+  name: vm-3
+spec:
+  persistentVolumeClaimName: vm-3
+---
+apiVersion: vm.cluster.gke.io/v1
+kind: VirtualMachineDisk
+metadata:
+  name: vm-4
+spec:
+  persistentVolumeClaimName: vm-4
+---
+apiVersion: vm.cluster.gke.io/v1
+kind: VirtualMachineDisk
+metadata:
+  name: vm-5
+spec:
+  persistentVolumeClaimName: vm-5

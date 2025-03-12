@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: altus-deployment
+  labels:
+    app: altus
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: altus
+  template:
+    metadata:
+      labels:
+        app: altus
+    spec:
+      containers:
+      - name: altus
+        image: quay.io/telosalliance/altus
+        resources:
+          requests:
+            cpu: 200m
+            memory: 8Gi
+          limits:
+            cpu: 300m
+            memory: 8Gi
+        ports:
+        - containerPort: 80
+      imagePullSecrets:
+        - name: quay-pull-secret

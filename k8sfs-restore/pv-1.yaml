@@ -1,0 +1,89 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: vm-1 #windows-rs-1
+spec:
+  capacity:
+    storage: 100Gi
+  accessModes:
+    - ReadWriteMany
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: k8sfs
+  nfs:
+    path: /var/nfs/k8sfs/pvc-0473f5f4-ae7b-4b94-b31c-46762c261289
+    server: 172.21.237.31
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: vm-2
+spec:
+  capacity:
+    storage: 100Gi
+  accessModes:
+    - ReadWriteMany
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: k8sfs
+  nfs:
+    path: /var/nfs/k8sfs/pvc-0d82133b-8e9b-4123-99ac-a8d11c565d81
+    server: 172.21.237.31
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: vm-cs-2
+spec:
+  capacity:
+    storage: 4Ti
+  accessModes:
+    - ReadWriteMany
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: k8sfs
+  nfs:
+    path: /var/nfs/k8sfs/pvc-13b1e10c-c551-49cc-a025-fd09784d300b
+    server: 172.21.237.31
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: vm-3
+spec:
+  capacity:
+    storage: 100Gi
+  accessModes:
+    - ReadWriteMany
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: k8sfs
+  nfs:
+    path: /var/nfs/k8sfs/pvc-2854a780-0508-4220-b0fc-50caf3492cb8
+    server: 172.21.237.31
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: vm-4
+spec:
+  capacity:
+    storage: 100Gi
+  accessModes:
+    - ReadWriteMany
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: k8sfs
+  nfs:
+    path: /var/nfs/k8sfs/pvc-a28051c6-c234-4ce9-9445-d3df509d201f
+    server: 172.21.237.31
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: vm-5
+spec:
+  capacity:
+    storage: 100Gi
+  accessModes:
+    - ReadWriteMany
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: k8sfs
+  nfs:
+    path: /var/nfs/k8sfs/pvc-ebde2844-5d63-435f-b9ba-0b30f47b8a5f
+    server: 172.21.237.31

@@ -1,0 +1,90 @@
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: cluster-audacy-user-cluster
+---
+apiVersion: baremetal.cluster.gke.io/v1
+kind: Cluster
+metadata:
+  name: audacy-user-cluster
+  namespace: cluster-audacy-user-cluster
+spec:
+  anthosBareMetalVersion: 1.30.100-gke.96
+  bypassPreflightCheck: false
+  clusterNetwork:
+    multipleNetworkInterfaces: true
+    sriovOperator: true
+    bundledIngress: true
+    pods:
+      cidrBlocks:
+      - 192.168.0.0/16
+    services:
+      cidrBlocks:
+      - 10.96.0.0/20
+  clusterOperations:
+    enableApplication: false
+    location: us-east4
+    projectID: audacy-dc-dev
+  clusterSecurity:
+    authorization:
+      clusterAdmin:
+        gcpAccounts:
+        - aaron.wolfrom@audacy.com
+        - mike.wiseley@cdw.com
+        - spencer.cuffe@cdw.com
+    enableRootlessContainers: true
+    enableSeccomp: true
+    startUIDRangeRootlessContainers: 2000
+  controlPlane:
+    nodePoolSpec:
+      nodes:
+      - address: 172.21.237.32
+      operatingSystem: linux
+  gkeConnect:
+    location: us-east4
+    projectID: audacy-dc-dev
+  gkeOnPremAPI:
+    enabled: true
+    location: us-east4
+  loadBalancer:
+    addressPools:
+    - addresses:
+      - 172.21.237.48/28
+      avoidBuggyIPs: true
+      manualAssign: false
+      name: lb-address-pool-1
+    mode: bundled
+    ports:
+      controlPlaneLBPort: 443
+    type: layer2
+    vips:
+      controlPlaneVIP: 172.21.237.37
+      ingressVIP: 172.21.237.48
+  nodeAccess:
+    loginUser: root
+  nodeConfig:
+    containerRuntime: containerd
+    podDensity:
+      maxPodsPerNode: 110
+  profile: default
+  storage:
+    lvpNodeMounts:
+      path: /mnt/localpv-disk
+      storageClassName: local-disks
+    lvpShare:
+      numPVUnderSharedPath: 5
+      path: /mnt/localpv-share
+      storageClassName: local-shared
+  type: user
+---
+apiVersion: baremetal.cluster.gke.io/v1
+kind: NodePool
+metadata:
+  name: audacy-node-pool
+  namespace: cluster-audacy-user-cluster
+spec:
+  clusterName: audacy-user-cluster
+  nodes:
+  - address: 172.21.237.33
+  operatingSystem: linux

@@ -1,0 +1,21 @@
+apiVersion: vm.cluster.gke.io/v1
+kind: VirtualMachine
+metadata:
+  name: x2
+spec:
+  osType: Windows
+  disks:
+    - virtualMachineDiskName: x2-drive
+      boot: true
+  compute:
+    cpu:
+      vcpus: 8
+    memory:
+      capacity: 32Gi
+  interfaces:
+    - name: eth0
+      networkName: pod-network
+      default: true
+    - name: eth1
+      networkName: livewire-nad
+      default: false

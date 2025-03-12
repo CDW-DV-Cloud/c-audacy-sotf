@@ -1,0 +1,12 @@
+apiVersion: networking.gke.io/v1
+kind: Network
+metadata:
+  name: heartbeat
+spec:
+  type: L2
+  networkLifecycle: AnthosManaged
+  l2NetworkConfig:
+    vlanID: 300
+  nodeInterfaceMatcher:
+    interfaceName: eno3
+  externalDHCP4: true

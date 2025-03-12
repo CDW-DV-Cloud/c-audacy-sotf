@@ -1,0 +1,82 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: forza-service
+spec:
+  type: LoadBalancer
+  selector:
+    app: forza-pod
+  ports:
+    - name: ftp
+      port: 21
+      protocol: TCP
+    - name: telnet
+      port: 23
+      protocol: TCP
+    - name: dns-tcp
+      port: 53
+      protocol: TCP
+    - name: dns-udp
+      port: 53
+      protocol: UDP
+    - name: http
+      port: 80
+      protocol: TCP
+    - name: netbios
+      port: 139
+      protocol: TCP
+    - name: https
+      port: 443
+      protocol: TCP
+    - name: smb
+      port: 445
+      protocol: TCP
+    - name: sisys
+      port: 2015
+      protocol: TCP
+    - name: rdp
+      port: 3389
+      protocol: TCP
+    - name: app-7000
+      port: 7000
+      protocol: TCP
+    - name: app-7800
+      port: 7800
+      protocol: TCP
+    - name: app-7801
+      port: 7801
+      protocol: TCP
+    - name: app-7802
+      port: 7802
+      protocol: TCP
+    - name: alt-https
+      port: 8443
+      protocol: TCP
+    - name: app-9999
+      port: 9999
+      protocol: TCP
+    - name: app-10011
+      port: 10011
+      protocol: TCP
+    - name: app-10516
+      port: 10516
+      protocol: TCP
+    - name: app-12001
+      port: 12001
+      protocol: TCP
+    - name: app-13087
+      port: 13087
+      protocol: TCP
+    - name: app-13090
+      port: 13090
+      protocol: TCP
+    - name: app-17472
+      port: 17472
+      protocol: TCP
+    - name: app-17475
+      port: 17475
+      protocol: TCP
+    - name: app-17724
+      port: 17724
+      protocol: TCP
+  allocateLoadBalancerNodePorts: false

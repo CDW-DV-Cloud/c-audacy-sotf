@@ -1,0 +1,79 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: wocs-service
+spec:
+  selector:
+    kubevirt/vm: windows-vm-2
+  ports:
+    - port: 21
+      targetPort: 21
+      name: ftp
+    - port: 23
+      targetPort: 23
+      name: telnet
+    - port: 53
+      targetPort: 53
+      name: dns
+    - port: 80
+      targetPort: 80
+      name: http
+    - port: 139
+      targetPort: 139
+      name: netbios
+    - port: 443
+      targetPort: 443
+      name: https
+    - port: 445
+      targetPort: 445
+      name: smb
+    - port: 2015
+      targetPort: 2015
+      name: db
+    - port: 3389
+      targetPort: 3389
+      name: rdp
+    - port: 7800
+      targetPort: 7800
+      name: custom-1
+    - port: 7802
+      targetPort: 7802
+      name: custom-2
+    - port: 8443
+      targetPort: 8443
+      name: https-alt
+    - port: 10011
+      targetPort: 10011
+      name: speak
+    - port: 10516
+      targetPort: 10516
+      name: mgmt
+    - port: 12001
+      targetPort: 12001
+      name: stream
+    - port: 13087
+      targetPort: 13087
+      name: custom-3
+    - port: 13090
+      targetPort: 13090
+      name: custom-4
+    - port: 17472
+      targetPort: 17472
+      name: custom-5
+    - port: 17475
+      targetPort: 17475
+      name: custom-6
+    - port: 17724
+      targetPort: 17724
+      name: custom-7
+    - port: 9999
+      targetPort: 9999
+      name: custom-8
+    - port: 7000
+      targetPort: 7000
+      name: custom-9
+    - port: 7801
+      targetPort: 7801
+      name: custom-10
+  type: LoadBalancer
+  allocateLoadBalancerNodePorts: false

@@ -1,0 +1,18 @@
+apiVersion: vm.cluster.gke.io/v1
+kind: VirtualMachine
+metadata:
+  name: wideorbit-cs
+spec:
+  osType: Windows
+  disks:
+    - virtualMachineDiskName: wideorbit-build-cs
+      boot: true
+    - virtualMachineDiskName: wideorbit-build-cs-2
+  compute:
+    cpu:
+      vcpus: 8
+    memory:
+      capacity: 32Gi
+  interfaces:
+    - name: eth0
+      networkName: pod-network

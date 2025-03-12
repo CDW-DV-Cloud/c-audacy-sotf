@@ -1,0 +1,24 @@
+apiVersion: vm.cluster.gke.io/v1
+kind: VirtualMachine
+metadata:
+  name: wideorbit-rs-1
+spec:
+  osType: Windows
+  disks:
+    - virtualMachineDiskName: wideorbit-build-rs
+      boot: true
+  compute:
+    cpu:
+      vcpus: 8
+    memory:
+      capacity: 32Gi
+  interfaces:
+    - name: eth0
+      networkName: pod-network
+      default: true
+    - default: false
+      ipAddresses:
+      - 172.16.0.2/24
+      name: eth1
+      networkName: livewire
+
