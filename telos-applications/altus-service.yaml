@@ -5,7 +5,7 @@ metadata:
 spec:
   type: LoadBalancer
   selector:
-    app: altus-pod
+    kubevirt/vm: altus-linux
   ports:
   - name: ftp
     port: 21

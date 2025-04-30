@@ -1,72 +1,6 @@
 apiVersion: vm.cluster.gke.io/v1
 kind: VirtualMachineDisk
 metadata:
-  name: pathfinder-vm
-spec:
-  size: 100Gi
-  storageClassName: k8sfs
-  source:
-    http:
-      url: https://cloud-images.ubuntu.com/releases/focal/release/ubuntu-20.04-server-cloudimg-amd64.img
----
-apiVersion: vm.cluster.gke.io/v1
-kind: VirtualMachine
-metadata:
-  name: pathfinder
-spec:
-  osType: Linux
-  compute:
-    cpu:
-      vcpus: 2
-    memory:
-      capacity: 8Gi
-  interfaces:
-    - name: eth0
-      networkName: pod-network
-      default: true
-    - name: net1
-      networkName: livewire
-      ipAddresses: [172.16.0.7/24]
-  disks:
-    - boot: true
-      virtualMachineDiskName: pathfinder-vm
----
-apiVersion: vm.cluster.gke.io/v1
-kind: VirtualMachineDisk
-metadata:
-  name: phones-vm
-spec:
-  size: 100Gi
-  storageClassName: k8sfs
-  source:
-    http:
-      url: https://cloud-images.ubuntu.com/releases/focal/release/ubuntu-20.04-server-cloudimg-amd64.img
----
-apiVersion: vm.cluster.gke.io/v1
-kind: VirtualMachine
-metadata:
-  name: phones-vx
-spec:
-  osType: Linux
-  compute:
-    cpu:
-      vcpus: 2
-    memory:
-      capacity: 8Gi
-  interfaces:
-    - name: eth0
-      networkName: pod-network
-      default: true
-    - name: net1
-      networkName: livewire
-      ipAddresses: [172.16.0.8/24]
-  disks:
-    - boot: true
-      virtualMachineDiskName: pathfinder-vm
----
-apiVersion: vm.cluster.gke.io/v1
-kind: VirtualMachineDisk
-metadata:
   name: altus-vm
 spec:
   size: 100Gi
@@ -113,6 +47,7 @@ kind: VirtualMachine
 metadata:
   name: altus-linux
 spec:
+  autoRestartOnConfigurationChange: true
   osType: Linux
   compute:
     cpu:
@@ -128,13 +63,14 @@ spec:
       ipAddresses: [172.16.0.10/24]
   disks:
     - boot: true
-      virtualMachineDiskName: pathfinder-vm
+      virtualMachineDiskName: altus-vm
 ---
 apiVersion: vm.cluster.gke.io/v1
 kind: VirtualMachine
 metadata:
   name: forza-linux
 spec:
+  autoRestartOnConfigurationChange: true
   osType: Linux
   compute:
     cpu:
@@ -150,13 +86,14 @@ spec:
       ipAddresses: [172.16.0.11/24]
   disks:
     - boot: true
-      virtualMachineDiskName: pathfinder-vm
+      virtualMachineDiskName: forza-vm
 ---
 apiVersion: vm.cluster.gke.io/v1
 kind: VirtualMachine
 metadata:
   name: pdm-linux
 spec:
+  autoRestartOnConfigurationChange: true
   osType: Linux
   compute:
     cpu:
@@ -172,13 +109,14 @@ spec:
       ipAddresses: [172.16.0.12/24]
   disks:
     - boot: true
-      virtualMachineDiskName: pathfinder-vm
+      virtualMachineDiskName: pdm-vm
 ---
 apiVersion: vm.cluster.gke.io/v1
 kind: VirtualMachine
 metadata:
   name: zephyr-linux
 spec:
+  autoRestartOnConfigurationChange: true
   osType: Linux
   compute:
     cpu:
@@ -194,5 +132,5 @@ spec:
       ipAddresses: [172.16.0.13/24]
   disks:
     - boot: true
-      virtualMachineDiskName: pathfinder-vm
+      virtualMachineDiskName: zephyr-vm
 ---

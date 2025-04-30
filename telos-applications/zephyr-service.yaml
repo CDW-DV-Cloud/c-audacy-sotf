@@ -5,7 +5,7 @@ metadata:
 spec:
   type: LoadBalancer
   selector:
-    app: zephyr-pod
+    kubevirt/vm: zephyr-linux
   ports:
   - name: ftp
     port: 21
