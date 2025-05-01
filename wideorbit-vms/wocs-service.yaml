@@ -4,7 +4,7 @@ metadata:
   name: wocs-service
 spec:
   selector:
-    kubevirt/vm: windows-vm-2
+    kubevirt/vm: content-linux
   ports:
     - port: 21
       targetPort: 21
