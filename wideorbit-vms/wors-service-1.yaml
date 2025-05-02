@@ -4,7 +4,7 @@ metadata:
   name: wors-1-service
 spec:
   selector:
-    kubevirt/vm: windows-vm-1
+    kubevirt/vm: radio-linux
   ports:
     - port: 21
       targetPort: 21
