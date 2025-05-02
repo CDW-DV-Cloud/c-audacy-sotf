@@ -19,7 +19,7 @@ spec:
       ipAddresses: [172.16.0.14/24]
   disks:
     - boot: true
-      virtualMachineDiskName: radio-vm
+      virtualMachineDiskName: radio-linux-boot-dv
 ---
 apiVersion: vm.cluster.gke.io/v1
 kind: VirtualMachine
@@ -42,5 +42,5 @@ spec:
       ipAddresses: [172.16.0.15/24]
   disks:
     - boot: true
-      virtualMachineDiskName: content-vm
+      virtualMachineDiskName: content-linux-boot-dv
 ---

@@ -1,47 +1,4 @@
-apiVersion: vm.cluster.gke.io/v1
-kind: VirtualMachineDisk
-metadata:
-  name: altus-vm
-spec:
-  size: 100Gi
-  storageClassName: k8sfs
-  source:
-    http:
-      url: https://cloud-images.ubuntu.com/releases/focal/release/ubuntu-20.04-server-cloudimg-amd64.img
----
-apiVersion: vm.cluster.gke.io/v1
-kind: VirtualMachineDisk
-metadata:
-  name: forza-vm
-spec:
-  size: 100Gi
-  storageClassName: k8sfs
-  source:
-    http:
-      url: https://cloud-images.ubuntu.com/releases/focal/release/ubuntu-20.04-server-cloudimg-amd64.img
----
-apiVersion: vm.cluster.gke.io/v1
-kind: VirtualMachineDisk
-metadata:
-  name: pdm-vm
-spec:
-  size: 100Gi
-  storageClassName: k8sfs
-  source:
-    http:
-      url: https://cloud-images.ubuntu.com/releases/focal/release/ubuntu-20.04-server-cloudimg-amd64.img
----
-apiVersion: vm.cluster.gke.io/v1
-kind: VirtualMachineDisk
-metadata:
-  name: zephyr-vm
-spec:
-  size: 100Gi
-  storageClassName: k8sfs
-  source:
-    http:
-      url: https://cloud-images.ubuntu.com/releases/focal/release/ubuntu-20.04-server-cloudimg-amd64.img
----
+
 apiVersion: vm.cluster.gke.io/v1
 kind: VirtualMachine
 metadata:
@@ -63,7 +20,7 @@ spec:
       ipAddresses: [172.16.0.10/24]
   disks:
     - boot: true
-      virtualMachineDiskName: altus-vm
+      virtualMachineDiskName: altus-linux-boot-dv
 ---
 apiVersion: vm.cluster.gke.io/v1
 kind: VirtualMachine
@@ -86,7 +43,7 @@ spec:
       ipAddresses: [172.16.0.11/24]
   disks:
     - boot: true
-      virtualMachineDiskName: forza-vm
+      virtualMachineDiskName: forza-linux-boot-dv
 ---
 apiVersion: vm.cluster.gke.io/v1
 kind: VirtualMachine
@@ -109,7 +66,7 @@ spec:
       ipAddresses: [172.16.0.12/24]
   disks:
     - boot: true
-      virtualMachineDiskName: pdm-vm
+      virtualMachineDiskName: pdm-linux-boot-dv
 ---
 apiVersion: vm.cluster.gke.io/v1
 kind: VirtualMachine
@@ -132,73 +89,4 @@ spec:
       ipAddresses: [172.16.0.13/24]
   disks:
     - boot: true
-      virtualMachineDiskName: zephyr-vm
----
-apiVersion: vm.cluster.gke.io/v1
-kind: VirtualMachineDisk
-metadata:
-  name: radio-vm
-spec:
-  size: 100Gi
-  storageClassName: k8sfs
-  source:
-    http:
-      url: https://cloud-images.ubuntu.com/releases/focal/release/ubuntu-20.04-server-cloudimg-amd64.img
----
-apiVersion: vm.cluster.gke.io/v1
-kind: VirtualMachineDisk
-metadata:
-  name: content-vm
-spec:
-  size: 100Gi
-  storageClassName: k8sfs
-  source:
-    http:
-      url: https://cloud-images.ubuntu.com/releases/focal/release/ubuntu-20.04-server-cloudimg-amd64.img
----
-apiVersion: vm.cluster.gke.io/v1
-kind: VirtualMachine
-metadata:
-  name: radio-linux
-spec:
-  autoRestartOnConfigurationChange: true
-  osType: Linux
-  compute:
-    cpu:
-      vcpus: 2
-    memory:
-      capacity: 8Gi
-  interfaces:
-    - name: eth0
-      networkName: pod-network
-      default: true
-    - name: net1
-      networkName: livewire
-      ipAddresses: [172.16.0.14/24]
-  disks:
-    - boot: true
-      virtualMachineDiskName: zephyr-vm
----
-apiVersion: vm.cluster.gke.io/v1
-kind: VirtualMachine
-metadata:
-  name: content-linux
-spec:
-  autoRestartOnConfigurationChange: true
-  osType: Linux
-  compute:
-    cpu:
-      vcpus: 2
-    memory:
-      capacity: 8Gi
-  interfaces:
-    - name: eth0
-      networkName: pod-network
-      default: true
-    - name: net1
-      networkName: livewire
-      ipAddresses: [172.16.0.15/24]
-  disks:
-    - boot: true
-      virtualMachineDiskName: zephyr-vm
----
+      virtualMachineDiskName: zephyr-linux-boot-dv
