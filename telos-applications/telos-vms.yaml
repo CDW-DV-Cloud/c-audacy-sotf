@@ -1,4 +1,3 @@
-
 apiVersion: vm.cluster.gke.io/v1
 kind: VirtualMachine
 metadata:
@@ -17,10 +16,10 @@ spec:
       default: true
     - name: net1
       networkName: livewire
-      ipAddresses: [172.16.0.10/24]
+      ipAddresses: [192.168.41.23/24]
   disks:
     - boot: true
-      virtualMachineDiskName: altus-linux-boot-dv
+      virtualMachineDiskName: altus-linux
 ---
 apiVersion: vm.cluster.gke.io/v1
 kind: VirtualMachine
@@ -40,10 +39,10 @@ spec:
       default: true
     - name: net1
       networkName: livewire
-      ipAddresses: [172.16.0.11/24]
+      ipAddresses: [192.168.41.24/24]
   disks:
     - boot: true
-      virtualMachineDiskName: forza-linux-boot-dv
+      virtualMachineDiskName: linux-clone
 ---
 apiVersion: vm.cluster.gke.io/v1
 kind: VirtualMachine
@@ -63,10 +62,10 @@ spec:
       default: true
     - name: net1
       networkName: livewire
-      ipAddresses: [172.16.0.12/24]
+      ipAddresses: [192.168.41.25/24]
   disks:
     - boot: true
-      virtualMachineDiskName: pdm-linux-boot-dv
+      virtualMachineDiskName: pdm-linux
 ---
 apiVersion: vm.cluster.gke.io/v1
 kind: VirtualMachine
@@ -86,7 +85,54 @@ spec:
       default: true
     - name: net1
       networkName: livewire
-      ipAddresses: [172.16.0.13/24]
+      ipAddresses: [192.168.41.26/24]
   disks:
     - boot: true
-      virtualMachineDiskName: zephyr-linux-boot-dv
+      virtualMachineDiskName: zephyr-linux
+---
+apiVersion: vm.cluster.gke.io/v1
+kind: VirtualMachine
+metadata:
+  name: radio-linux
+spec:
+  autoRestartOnConfigurationChange: true
+  osType: Linux
+  compute:
+    cpu:
+      vcpus: 2
+    memory:
+      capacity: 8Gi
+  interfaces:
+    - name: eth0
+      networkName: pod-network
+      default: true
+    - name: net1
+      networkName: livewire
+      ipAddresses: [192.168.41.27/24]
+  disks:
+    - boot: true
+      virtualMachineDiskName: radio-linux
+---
+apiVersion: vm.cluster.gke.io/v1
+kind: VirtualMachine
+metadata:
+  name: content-linux
+spec:
+  autoRestartOnConfigurationChange: true
+  osType: Linux
+  compute:
+    cpu:
+      vcpus: 2
+    memory:
+      capacity: 8Gi
+  interfaces:
+    - name: eth0
+      networkName: pod-network
+      default: true
+    - name: net1
+      networkName: livewire
+      ipAddresses: [192.168.41.28/24]
+  disks:
+    - boot: true
+      virtualMachineDiskName: content-linux
+---

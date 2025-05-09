@@ -1,0 +1,10 @@
+apiVersion: vm.cluster.gke.io/v1
+kind: VirtualMachineDisk
+metadata:
+  name: ubuntu-2204-iso
+spec:
+  source:
+    gcs:
+      url: https://storage.googleapis.com/audacy-dec-dev-vm-images/ubuntu-22.04.5-live-server-amd64.iso
+  size: 10Gi
+  diskType: cdrom

@@ -1,0 +1,31 @@
+apiVersion: vm.cluster.gke.io/v1
+kind: VirtualMachineDisk
+metadata:
+  name: zephyr-linux
+spec:
+  size: 75Gi
+  storageClassName: k8sfs
+---
+apiVersion: vm.cluster.gke.io/v1
+kind: VirtualMachine
+metadata:
+  name: zephyr-linux
+spec:
+  autoRestartOnConfigurationChange: true
+  osType: Linux
+  compute:
+    cpu:
+      vcpus: 2
+    memory:
+      capacity: 8Gi
+  interfaces:
+    - name: eth0
+      networkName: pod-network
+      default: true
+    - name: net1
+      networkName: livewire
+      ipAddresses: [192.168.41.45/24]
+  disks:
+    -  virtualMachineDiskName: zephyr-linux
+    -  virtualMachineDiskName: ubuntu-2204-iso
+       boot: true
